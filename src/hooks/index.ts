@@ -46,24 +46,41 @@ export function useEditorAutosave(pageId: string) {
   const save = useCallback(
     async (data: typeof customData) => {
       if (!pageId) return;
+
       setIsSaving(true);
+
       const { error } = await supabase
         .from("pages")
-        .update({ custom_data_json: data, updated_at: new Date().toISOString() })
+        .update({
+          custom_data_json: data,
+          updated_at: new Date().toISOString(),
+        })
         .eq("id", pageId);
-      if (error) console.error("[autosave]", error.message);
+
+      if (error) {
+        console.error("[autosave]", error.message);
+      }
+
       setIsSaving(false);
     },
     [pageId, supabase, setIsSaving]
   );
 
-  const debouncedSave = useRef(debounce(save, 1500)).current;
+  // ✅ create debounced function safely
+  const debouncedSaveRef = useRef(debounce(save, 1500));
 
+  // ✅ update debounce when save changes
   useEffect(() => {
-    if (isDirty) debouncedSave(customData);
-  }, [customData, isDirty, debouncedSave]);
-}
+    debouncedSaveRef.current = debounce(save, 1500);
+  }, [save]);
 
+  // ✅ autosave effect
+  useEffect(() => {
+    if (isDirty) {
+      debouncedSaveRef.current(customData);
+    }
+  }, [customData, isDirty]);
+}
 // ============================================================
 // useShareLink — copies page URL to clipboard
 // ============================================================

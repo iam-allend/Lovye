@@ -61,14 +61,18 @@ export function getDataValue(
 // ============================================================
 // DEBOUNCE (used for autosave in editor)
 // ============================================================
-export function debounce<T extends (...args: unknown[]) => unknown>(
+export function debounce<T extends (...args: never[]) => unknown>(
   fn: T,
   delay: number
 ): (...args: Parameters<T>) => void {
   let timer: ReturnType<typeof setTimeout>;
-  return (...args) => {
+
+  return (...args: Parameters<T>) => {
     clearTimeout(timer);
-    timer = setTimeout(() => fn(...args), delay);
+
+    timer = setTimeout(() => {
+      fn(...args);
+    }, delay);
   };
 }
 
