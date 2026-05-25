@@ -21,11 +21,11 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname();
 
-  const [mobileOpen, setMobileOpen] =
-    useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [menuAnimating, setMenuAnimating] = useState(false);
 
-  const [activeHash, setActiveHash] =
-    useState("");
+  const [activeHash, setActiveHash] = useState("");
 
   useEffect(() => {
     const updateHash = () => {
@@ -34,16 +34,9 @@ export default function Navbar() {
 
     updateHash();
 
-    window.addEventListener(
-      "hashchange",
-      updateHash
-    );
+    window.addEventListener("hashchange", updateHash);
 
-    return () =>
-      window.removeEventListener(
-        "hashchange",
-        updateHash
-      );
+    return () => window.removeEventListener("hashchange", updateHash);
   }, []);
 
   const isActive = (href: string) => {
@@ -52,6 +45,20 @@ export default function Navbar() {
     }
 
     return activeHash === href;
+  };
+
+  const handleMenuToggle = () => {
+    if (mobileOpen) {
+      setMenuAnimating(true);
+      setTimeout(() => {
+        setMobileOpen(false);
+        setMenuVisible(false);
+        setMenuAnimating(false);
+      }, 250);
+    } else {
+      setMobileOpen(true);
+      setMenuVisible(true);
+    }
   };
 
   return (
@@ -88,8 +95,7 @@ export default function Navbar() {
                 "linear-gradient(135deg, rgba(240,65,90,0.18), rgba(196,174,255,0.18))",
               WebkitMask:
                 "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-              WebkitMaskComposite:
-                "xor",
+              WebkitMaskComposite: "xor",
               maskComposite: "exclude",
             }}
           />
@@ -119,18 +125,13 @@ export default function Navbar() {
                 duration-300
                 group-hover:scale-105
                 animate-logo-float
-                group-hover:scale-105
                 glow-rose-1
               "
               style={{
-                background:
-                  "var(--rose-400)",
+                background: "var(--rose-400)",
               }}
             >
-              <Heart
-                size={16}
-                fill="currentColor"
-              />
+              <Heart size={16} fill="currentColor" />
             </div>
 
             <div className="leading-none">
@@ -141,10 +142,8 @@ export default function Navbar() {
                   tracking-tight
                 "
                 style={{
-                  fontFamily:
-                    "var(--font-script)",
-                  color:
-                    "var(--rose-400)",
+                  fontFamily: "var(--font-script)",
+                  color: "var(--rose-400)",
                   lineHeight: 1,
                   fontWeight: 400,
                   fontSize: "2.2rem",
@@ -158,9 +157,7 @@ export default function Navbar() {
           {/* DESKTOP NAV */}
           <nav className="hidden items-center gap-1 md:flex">
             {links.map((item) => {
-              const active = isActive(
-                item.href
-              );
+              const active = isActive(item.href);
 
               return (
                 <a
@@ -237,16 +234,13 @@ export default function Navbar() {
                           rounded-full
                         "
                         style={{
-                          boxShadow:
-                            "0 0 18px rgba(240,65,90,0.10)",
+                          boxShadow: "0 0 18px rgba(240,65,90,0.10)",
                         }}
                       />
                     </>
                   )}
 
-                  <span className="relative z-10">
-                    {item.label}
-                  </span>
+                  <span className="relative z-10">{item.label}</span>
                 </a>
               );
             })}
@@ -290,8 +284,7 @@ export default function Navbar() {
                 glow-lavender-1
               "
               style={{
-                background:
-                  "var(--lavender-400)",
+                background: "var(--lavender-400)",
               }}
             >
               Mulai Gratis
@@ -299,9 +292,7 @@ export default function Navbar() {
 
             {/* MOBILE BUTTON */}
             <button
-              onClick={() =>
-                setMobileOpen(!mobileOpen)
-              }
+              onClick={handleMenuToggle}
               className="
                 flex
                 h-11
@@ -316,190 +307,178 @@ export default function Navbar() {
                 glow-lavender-1
               "
               style={{
-                background:
-                  mobileOpen
-                    ? "var(--rose-400)"
-                    : "var(--lavender-400)",
+                background: mobileOpen
+                  ? "var(--rose-400)"
+                  : "var(--lavender-400)",
               }}
             >
-              {mobileOpen ? (
-                <X size={18} />
-              ) : (
-                <Menu size={18} />
-              )}
+              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
 
         {/* MOBILE MENU */}
-        <div
-          className={cn(
-            `
-              grid
-              transition-all
-              duration-500
-              ease-[cubic-bezier(0.22,1,0.36,1)]
-              md:hidden
-            `,
-            mobileOpen
-              ? "grid-rows-[1fr] opacity-100 pt-3"
-              : "grid-rows-[0fr] opacity-0"
-          )}
-        >
+        {menuVisible && (
           <div
-            className="
-              rounded-[2rem]
-              border
-              border-white/50
-              bg-white/65
-              p-3
-              shadow-[0_10px_40px_rgba(240,65,90,0.10)]
-              backdrop-blur-2xl
-            "
+            className={cn(
+              "pt-3 md:hidden",
+              menuAnimating ? "mobile-menu-exit" : "mobile-menu-enter"
+            )}
           >
-            <div className="flex flex-col gap-1">
-              {links.map((item) => {
-                const active = isActive(item.href);
+            <div
+              className="
+                rounded-[2rem]
+                border
+                border-white/50
+                bg-white
+                p-3
+                glow-rose-1
+                backdrop-blur-2xl
+              "
+              style={{ willChange: "auto" }}
+            >
+              <div className="flex flex-col gap-1">
+                {links.map((item) => {
+                  const active = isActive(item.href);
 
-                return (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={cn(
-                      `
-                        group
-                        relative
-                        overflow-hidden
-                        flex
-                        items-center
-                        justify-between
-                        rounded-2xl
-                        px-4
-                        py-2.5
-                        text-sm
-                        font-medium
-                        transition-all
-                        duration-300
-                      `,
-                      active
-                        ? "text-[var(--color-text)] animate-mobile-nav-float"
-                        : "text-[var(--color-text)]"
-                    )}
-                  >
-                    {/* hover bg */}
-                    <span
-                      className="
-                        absolute
-                        inset-0
-                        rounded-2xl
-                        bg-[rgba(240,65,90,0.06)]
-                        opacity-0
-                        transition-opacity
-                        duration-300
-                        group-hover:opacity-100
-                      "
-                    />
-
-                    {/* ACTIVE BORDER */}
-                    {active && (
-                      <>
-                        <span
-                          className="
-                            absolute
-                            inset-0
-                            rounded-xl
-                            p-[2px]
-                            animate-gradient-border
-                          "
-                          style={{
-                            background:
-                              "linear-gradient(135deg, rgba(240,65,90,0.75), rgba(196,174,255,0.9), rgba(240,65,90,0.75))",
-
-                            WebkitMask:
-                              "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-
-                            WebkitMaskComposite:
-                              "xor",
-
-                            maskComposite: "exclude",
-                          }}
-                        />
-
-                        {/* glow */}
-                        <span
-                          className="
-                            absolute
-                            inset-0
-                            rounded-xl
-                            animate-mobile-active-glow
-                          "
-                        />
-                      </>
-                    )}
-
-                    <span className="relative z-10">
-                      {item.label}
-                    </span>
-
-                    {active && (
-                      <Sparkles
-                        size={15}
-                        className="
+                  return (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => {
+                        setMenuAnimating(true);
+                        setTimeout(() => {
+                          setMobileOpen(false);
+                          setMenuVisible(false);
+                          setMenuAnimating(false);
+                        }, 250);
+                      }}
+                      className={cn(
+                        `
+                          group
                           relative
-                          z-10
-                          animate-sparkle-float
+                          overflow-hidden
+                          flex
+                          items-center
+                          justify-between
+                          rounded-2xl
+                          px-4
+                          py-2.5
+                          text-sm
+                          font-medium
+                          transition-all
+                          duration-300
+                        `,
+                        active
+                          ? "text-[var(--color-text)] animate-mobile-nav-float"
+                          : "text-[var(--color-text)]"
+                      )}
+                    >
+                      {/* hover bg */}
+                      <span
+                        className="
+                          absolute
+                          inset-0
+                          rounded-2xl
+                          bg-[rgba(240,65,90,0.06)]
+                          opacity-0
+                          transition-opacity
+                          duration-300
+                          group-hover:opacity-100
                         "
                       />
-                    )}
-                  </a>
-                );
-              })}
-            </div>
 
-            <div className="mt-3 grid grid-cols-2 gap-2">
-              <Link
-                href="/login"
-                className="
-                  rounded-2xl
-                  px-4
-                  py-3
-                  text-center
-                  text-sm
-                  font-medium
-                "
-                style={{
-                  background:
-                    "rgba(240,65,90,0.08)",
-                  color:
-                    "var(--color-primary)",
-                }}
-              >
-                Masuk
-              </Link>
+                      {/* ACTIVE BORDER */}
+                      {active && (
+                        <>
+                          <span
+                            className="
+                              absolute
+                              inset-0
+                              rounded-xl
+                              p-[2px]
+                              animate-gradient-border
+                            "
+                            style={{
+                              background:
+                                "linear-gradient(135deg, rgba(240,65,90,0.75), rgba(196,174,255,0.9), rgba(240,65,90,0.75))",
+                              WebkitMask:
+                                "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                              WebkitMaskComposite: "xor",
+                              maskComposite: "exclude",
+                            }}
+                          />
 
-              <Link
-                href="/register"
-                className="
-                  rounded-2xl
-                  px-4
-                  py-3
-                  text-center
-                  text-sm
-                  font-medium
-                  text-white
-                  glow-lavender-1
-                "
-                style={{
-                  background:
-                    "var(--lavender-400)",
-                }}
-              >
-                Mulai Gratis
-              </Link>
+                          {/* glow */}
+                          <span
+                            className="
+                              absolute
+                              inset-0
+                              rounded-xl
+                              animate-mobile-active-glow
+                            "
+                          />
+                        </>
+                      )}
+
+                      <span className="relative z-10">{item.label}</span>
+
+                      {active && (
+                        <Sparkles
+                          size={15}
+                          className="
+                            relative
+                            z-10
+                            animate-sparkle-float
+                          "
+                        />
+                      )}
+                    </a>
+                  );
+                })}
+              </div>
+
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                <Link
+                  href="/login"
+                  className="
+                    rounded-xl
+                    px-4
+                    py-3
+                    text-center
+                    text-sm
+                    font-medium
+                  "
+                  style={{
+                    background: "rgba(240,65,90,0.08)",
+                    color: "var(--color-primary)",
+                  }}
+                >
+                  Masuk
+                </Link>
+
+                <Link
+                  href="/register"
+                  className="
+                    rounded-xl
+                    px-4
+                    py-3
+                    text-center
+                    text-sm
+                    font-medium
+                    text-white
+                    glow-lavender-1
+                  "
+                  style={{
+                    background: "var(--lavender-400)",
+                  }}
+                >
+                  Mulai Gratis
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </header>
     </>
   );

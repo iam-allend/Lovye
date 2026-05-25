@@ -51,7 +51,11 @@ export default function RootLayout({
       `}
     >
       <body>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <div style={{ overflowX: "hidden" }}>
+            {children}
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

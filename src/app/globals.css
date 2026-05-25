@@ -10,7 +10,7 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 .font-display { font-family: var(--font-display); }
@@ -539,4 +539,35 @@ label.text-xs.font-medium.tracking-wide{
 .animate-sparkle-float {
   animation:
     sparkleFloat 3s ease-in-out infinite;
+}
+
+/* MOBILE MENU ANIMATION */
+@keyframes mobileMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mobileMenuOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+.mobile-menu-enter {
+  animation: mobileMenuIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.mobile-menu-exit {
+  animation: mobileMenuOut 0.25s cubic-bezier(0.4, 0, 1, 1) forwards;
 }
