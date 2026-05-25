@@ -92,7 +92,7 @@ export default function HeroSection() {
                 className="
                   mt-6
                   max-w-xl
-                  text-5xl
+                  text-4xl
                   font-semibold
                   leading-[1.05]
                   tracking-tight
