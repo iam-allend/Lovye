@@ -35,7 +35,7 @@ body {
 
 /* Soft primary button */
 .btn-primary {
-  background: linear-gradient(135deg, #f7687e 0%, #f0415a 60%, #c4aeff 100%);
+  background: var(--rose-400);
   color: white;
   border-radius: var(--radius-md);
   font-weight: 500;
@@ -93,6 +93,263 @@ body {
 .delay-400 { animation-delay: 0.40s; }
 .delay-500 { animation-delay: 0.50s; }
 .delay-700 { animation-delay: 0.70s; }
+
+
+/* =========================================================
+   LOVYE GLOBAL UTILITIES
+   ========================================================= */
+
+/* ---------- TEXT COLORS ---------- */
+.text-rose-50 { color: var(--rose-50); }
+.text-rose-100 { color: var(--rose-100); }
+.text-rose-200 { color: var(--rose-200); }
+.text-rose-300 { color: var(--rose-300); }
+.text-rose-400 { color: var(--rose-400); }
+.text-rose-500 { color: var(--rose-500); }
+
+/* Peach */
+.text-peach-50 { color: var(--peach-50); }
+.text-peach-100 { color: var(--peach-100); }
+.text-peach-200 { color: var(--peach-200); }
+.text-peach-300 { color: var(--peach-300); }
+.text-peach-400 { color: var(--peach-400); }
+
+/* Lavender */
+.text-lavender-50 { color: var(--lavender-50); }
+.text-lavender-100 { color: var(--lavender-100); }
+.text-lavender-200 { color: var(--lavender-200); }
+.text-lavender-300 { color: var(--lavender-300); }
+.text-lavender-400 { color: var(--lavender-400); }
+
+/* Cream */
+.text-cream-50 { color: var(--cream-50); }
+.text-cream-100 { color: var(--cream-100); }
+.text-cream-200 { color: var(--cream-200); }
+
+/* Blush */
+.text-blush-50 { color: var(--blush-50); }
+.text-blush-100 { color: var(--blush-100); }
+.text-blush-200 { color: var(--blush-200); }
+
+/* ---------- SEMANTIC ---------- */
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-muted {
+  color: var(--color-muted);
+}
+
+.text-soft {
+  color: var(--color-text-2);
+}
+
+.bg-primary {
+  background: var(--color-primary);
+}
+
+.bg-primary-soft {
+  background: var(--color-primary-soft);
+}
+
+.bg-accent {
+  background: var(--color-accent);
+}
+
+.bg-accent-soft {
+  background: var(--color-accent-soft);
+}
+
+
+/* ---------- SHADOWS ---------- */
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-float {
+  box-shadow: var(--shadow-float);
+}
+
+.glow-rose {
+  box-shadow: var(--glow-rose);
+}
+
+.glow-lavender {
+  box-shadow: var(--glow-lavender);
+}
+
+
+/* ---------- BACKGROUNDS ---------- */
+
+.bg-primary-soft {
+  background: var(--color-primary-soft);
+}
+
+.bg-accent-soft {
+  background: var(--color-accent-soft);
+}
+
+.bg-surface {
+  background: var(--color-surface);
+}
+
+/* ---------- GLASS VARIANTS ---------- */
+
+.glass-dark {
+  background: rgba(20,16,28,0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.glass-light {
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.92);
+}
+
+/* ---------- INPUT ---------- */
+
+.input-lovye {
+  width: 100%;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font-size: 14px;
+  outline: none;
+  transition: var(--transition);
+
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,255,255,0.7);
+
+  color: var(--color-text);
+  box-shadow: var(--shadow-soft);
+}
+
+.input-lovye::placeholder {
+  color: var(--color-muted);
+}
+
+.input-lovye:focus {
+  border-color: var(--rose-300);
+  box-shadow:
+    0 0 0 4px rgba(240,65,90,0.08),
+    0 8px 30px rgba(240,65,90,0.12);
+  background: rgba(255,255,255,0.85);
+}
+
+/* ---------- BUTTONS ---------- */
+
+.btn-gradient-rose {
+  background: linear-gradient(
+    135deg,
+    #f7687e 0%,
+    #f0415a 55%,
+    #c4aeff 100%
+  );
+
+  color: white;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: var(--transition);
+
+  box-shadow:
+    0 10px 30px rgba(240,65,90,0.18);
+}
+
+.btn-gradient-rose:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 16px 40px rgba(240,65,90,0.24);
+}
+
+.btn-gradient-plum {
+  background: linear-gradient(
+    135deg,
+    #c4aeff 0%,
+    #f0415a 100%
+  );
+
+  color: white;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+/* ---------- BORDERS ---------- */
+.border-rose-100 { border-color: var(--rose-100); }
+.border-rose-200 { border-color: var(--rose-200); }
+.border-rose-300 { border-color: var(--rose-300); }
+.border-rose-400 { border-color: var(--rose-400); }
+
+.border-peach-100 { border-color: var(--peach-100); }
+.border-peach-200 { border-color: var(--peach-200); }
+.border-peach-300 { border-color: var(--peach-300); }
+
+.border-lavender-100 { border-color: var(--lavender-100); }
+.border-lavender-200 { border-color: var(--lavender-200); }
+.border-lavender-300 { border-color: var(--lavender-300); }
+.border-lavender-400 { border-color: var(--lavender-400); }
+
+.border-soft {
+  border: 1px solid rgba(240,65,90,0.10);
+}
+
+.border-glass {
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* ---------- SHADOWS ---------- */
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.shadow-float {
+  box-shadow: var(--shadow-float);
+}
+
+.glow-rose {
+  box-shadow: var(--glow-rose);
+}
+.glow-rose-1 {
+  box-shadow: var(--glow-rose-1);
+}
+
+
+.glow-lavender {
+  box-shadow: var(--glow-lavender);
+}
+
+.glow-lavender-1 {
+  box-shadow: var(--glow-lavender-1);
+}
+
+
+
+
+/* =========================================================
+   LOVYE BUTTON UTILITIES CUSTOM
+   ========================================================= */
+
+.register-btn {
+  background: var(--lavender-400);
+}
+
+
+/* =========================================================
+   LOVYE ADJUSTABLE CUSTOM
+   ========================================================= */
 
 label.text-xs.font-medium.tracking-wide{
   padding-left: 10px;

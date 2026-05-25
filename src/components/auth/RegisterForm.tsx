@@ -33,8 +33,8 @@ export default function RegisterForm() {
         type="button"
         onClick={async () => { setGoogleLoading(true); await loginWithGoogle(); }}
         disabled={googleLoading}
-        className="w-full flex items-center justify-center gap-2.5 py-3 rounded-2xl text-sm font-medium transition-all duration-300 hover:-translate-y-px"
-        style={{ background: "white", border: "1.5px solid rgba(196,174,255,0.30)", color: "var(--color-text-2)", boxShadow: "0 2px 12px rgba(196,174,255,0.10)" }}>
+        className="w-full flex items-center justify-center gap-2.5 py-3 rounded-2xl text-sm font-medium transition-all duration-300 hover:-translate-y-px glow-lavender-1"
+        style={{ background: "white", border: "1.5px solid rgba(196,174,255,0.30)", color: "var(--color-text-2)" }}>
         <GoogleIcon />
         {googleLoading ? "Mengarahkan..." : "Daftar dengan Google"}
       </button>
@@ -74,8 +74,7 @@ export default function RegisterForm() {
         ))}
 
         <button type="submit" disabled={isSubmitting}
-          className="w-full py-3.5 text-sm font-medium text-white rounded-2xl mt-1 transition-all duration-300 hover:-translate-y-px disabled:opacity-60"
-          style={{ background: "linear-gradient(135deg, #c4aeff 0%, #f0415a 100%)", boxShadow: "0 4px 20px rgba(196,174,255,0.30)" }}>
+          className="w-full py-3.5 text-sm font-medium text-white rounded-2xl mt-1 transition-all duration-300 hover:-translate-y-px disabled:opacity-60 register-btn glow-lavender">
           {isSubmitting ? "Membuat akun..." : "Buat akun"}
         </button>
       </form>

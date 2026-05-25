@@ -14,10 +14,10 @@ export default function RegisterPage() {
 
       <div className="relative z-10 w-full max-w-sm">
         <div className="text-center mb-10 animate-fade-up">
-          <p className="font-script text-6xl mb-1" style={{ fontFamily: "var(--font-script)", color: "#f0415a" }}>
+          <p className="font-script text-6xl mb-1 text-lavender-400" style={{ fontFamily: "var(--font-script)"}}>
             lovye
           </p>
-          <p className="text-xs tracking-[0.25em] uppercase" style={{ color: "var(--color-muted)" }}>
+          <p className="text-xs tracking-[0.25em] uppercase text-muted">
             Digital Emotional Greeting
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function RegisterPage() {
 
         <p className="text-center text-sm mt-6 animate-fade-up delay-200" style={{ color: "var(--color-muted)" }}>
           Sudah punya akun?{" "}
-          <Link href="/login" className="font-medium transition-colors hover:opacity-70" style={{ color: "var(--color-primary)" }}>
+          <Link href="/login" className="font-medium transition-colors hover:opacity-70 text-lavender-400">
             Masuk di sini
           </Link>
         </p>

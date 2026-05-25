@@ -27,12 +27,11 @@ export default function LoginForm({ redirectTo }: { redirectTo?: string }) {
         type="button"
         onClick={async () => { setGoogleLoading(true); await loginWithGoogle(); }}
         disabled={googleLoading}
-        className="w-full flex items-center justify-center gap-2.5 py-3 rounded-2xl text-sm font-medium transition-all duration-300 hover:-translate-y-px"
+        className="w-full flex items-center justify-center gap-2.5 py-3 rounded-2xl text-sm font-medium transition-all duration-300 hover:-translate-y-px glow-rose-1"
         style={{
           background: "white",
           border: "1.5px solid rgba(240,65,90,0.15)",
           color: "var(--color-text-2)",
-          boxShadow: "0 2px 12px rgba(240,65,90,0.06)",
         }}>
         <GoogleIcon />
         {googleLoading ? "Mengarahkan..." : "Lanjutkan dengan Google"}
@@ -66,7 +65,7 @@ export default function LoginForm({ redirectTo }: { redirectTo?: string }) {
           />
         </InputField>
 
-        <button type="submit" disabled={isSubmitting} className="btn-primary w-full py-3.5 text-sm mt-1 disabled:opacity-60">
+        <button type="submit" disabled={isSubmitting} className="btn-primary w-full py-3.5 text-sm mt-1 disabled:opacity-60 glow-rose">
           {isSubmitting ? "Masuk..." : "Masuk"}
         </button>
       </form>
