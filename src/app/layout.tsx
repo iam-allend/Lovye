@@ -1,8 +1,31 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import {
+  Cormorant_Garamond,
+  Great_Vibes,
+  Plus_Jakarta_Sans,
+} from "next/font/google";
+
 import { AuthProvider } from "@/components/providers/AuthProvider";
+
 import "@/app/globals.css";
+
+const displayFont = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const bodyFont = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const scriptFont = Great_Vibes({
+  subsets: ["latin"],
+  variable: "--font-script",
+  weight: ["400"],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -10,14 +33,7 @@ export const metadata: Metadata = {
     template: "%s | Lovye",
   },
   description:
-    "Buat halaman ucapan digital interaktif yang aesthetic dan bisa dibagikan. Birthday, Anniversary, Confess, dan lebih banyak lagi.",
-  openGraph: {
-    title: "Lovye",
-    description: "Digital Emotional Greeting Experience",
-    url: "https://lovye.site",
-    siteName: "Lovye",
-    type: "website",
-  },
+    "Buat halaman ucapan digital interaktif yang aesthetic dan bisa dibagikan.",
 };
 
 export default function RootLayout({
@@ -26,8 +42,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="bg-white text-gray-900 antialiased">
+    <html
+      lang="id"
+      className={`
+        ${displayFont.variable}
+        ${bodyFont.variable}
+        ${scriptFont.variable}
+      `}
+    >
+      <body>
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

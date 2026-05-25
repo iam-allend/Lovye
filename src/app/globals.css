@@ -1,5 +1,5 @@
-@import "../styles/design-tokens.css";
 @import "tailwindcss";
+@import "../styles/design-tokens.css";
 
 
 * { box-sizing: border-box; }
@@ -358,4 +358,185 @@ label.text-xs.font-medium.tracking-wide{
 
 .text-muted-form{
   padding-left: 10px;
+}
+
+
+
+/* =========================================================
+  animation: float 6s ease-in-out infinite;
+} */
+
+.petal-1 {
+  top: 20%;
+  left: 8%;
+}
+
+.petal-2 {
+  top: 65%;
+  right: 12%;
+}
+
+.petal-3 {
+  bottom: 18%;
+  left: 20%;
+}
+
+.petal-4 {
+  top: 30%;
+  right: 24%;
+}
+
+/* Responsive */
+
+@media (max-width: 1024px) {
+  .lovye-hero-grid,
+  .lovye-template-grid,
+  .lovye-category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lovye-hero-section {
+    padding-top: 120px;
+  }
+
+  .lovye-showcase-card,
+  .lovye-cta-card {
+    padding: 48px 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .lovye-nav-links {
+    display: none;
+  }
+
+  .lovye-navbar-inner {
+    padding: 0 18px;
+  }
+
+  .lovye-hero-title {
+    font-size: 3.2rem;
+  }
+
+  .lovye-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lovye-main-cta,
+  .lovye-secondary-btn {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .lovye-section,
+  .lovye-showcase-section {
+    padding: 90px 20px;
+  }
+
+  .lovye-footer-content {
+    flex-direction: column;
+  }
+}
+
+
+
+
+
+
+
+
+/* LOGO & NAVBAR ANIMATION */
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes softFloatLogo {
+  0%,100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.animate-gradient-border {
+  background-size: 220% 220% !important;
+  animation: gradientShift 6s ease infinite !important;
+}
+
+.animate-logo-float {
+  animation:
+    softFloatLogo 3.5s ease-in-out infinite !important;
+}
+
+.animate-desktop-nav-float {
+  animation:
+    mobileNavFloat 4s ease-in-out infinite;
+}
+
+
+/* MOBILE ACTIVE NAV */
+
+@keyframes mobileNavFloat {
+  0%,100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-1.5px);
+  }
+}
+
+@keyframes mobileGlowPulse {
+  0%,100% {
+    opacity: 0.55;
+    filter: blur(0px);
+  }
+
+  50% {
+    opacity: 1;
+    filter: blur(2px);
+  }
+}
+
+@keyframes sparkleFloat {
+  0%,100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-1px) rotate(8deg);
+  }
+}
+
+.animate-mobile-nav-float {
+  animation:
+    mobileNavFloat 4s ease-in-out infinite;
+}
+
+.animate-mobile-active-glow {
+  box-shadow:
+    0 0 18px rgba(240,65,90,0.14),
+    0 0 30px rgba(196,174,255,0.10);
+
+  animation:
+    mobileGlowPulse 4s ease-in-out infinite;
+}
+
+.animate-sparkle-float {
+  animation:
+    sparkleFloat 3s ease-in-out infinite;
 }
