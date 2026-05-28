@@ -17,4 +17,12 @@ export async function getAllActiveTemplates() {
     .order("sort_order");
 }
 
-
+export async function getUserOwnedTemplateIds(userId: string): Promise<Set<string>> {
+  const sb = await createClient();
+  const { data } = await sb
+    .from("purchases")
+    .select("template_id")
+    .eq("user_id", userId)
+    .eq("payment_status", "paid");
+  return new Set((data ?? []).map((p) => p.template_id));
+}

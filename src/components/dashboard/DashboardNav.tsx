@@ -6,19 +6,22 @@ import type { Profile } from "@/types/database";
 
 const links = [
   { href: "/dashboard", label: "Halaman Saya" },
-  { href: "/templates", label: "Template" },
+  { href: "/mytemplates", label: "Template Saya" },
 ];
 
 export default function DashboardNav({ profile }: { profile: Profile | null }) {
   const path = usePathname();
   return (
     <nav className="sticky top-0 z-50 border-b"
-      style={{ background: "rgba(255,252,248,0.85)", backdropFilter: "blur(16px)", borderColor: "rgba(240,65,90,0.08)" }}>
+      style={{ background: "rgba(255,252,248,0.88)", backdropFilter: "blur(16px)", borderColor: "rgba(240,65,90,0.08)" }}>
       <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
-        <Link href="/dashboard" style={{ fontFamily: "var(--font-script)", fontSize: "1.6rem", color: "var(--color-primary)", lineHeight: 1 }}>
+        <Link href="/dashboard"
+          style={{ fontFamily: "var(--font-script)", fontSize: "1.6rem", color: "var(--rose-400)", lineHeight: 1 }}>
           lovye
         </Link>
-        <div className="flex items-center gap-1">
+
+        {/* Desktop nav */}
+        <div className="hidden sm:flex items-center gap-1">
           {links.map((l) => (
             <Link key={l.href} href={l.href}
               className="px-3 py-1.5 rounded-xl text-sm transition-all"
@@ -31,15 +34,34 @@ export default function DashboardNav({ profile }: { profile: Profile | null }) {
             </Link>
           ))}
         </div>
-        <div className="flex items-center gap-2.5">
+
+        {/* Mobile nav — icon only */}
+        <div className="flex sm:hidden items-center gap-1">
+          {[
+            { href: "/dashboard",           label: "🏠" },
+            { href: "/mytemplates", label: "🎨" },
+          ].map((l) => (
+            <Link key={l.href} href={l.href}
+              className="w-9 h-9 flex items-center justify-center rounded-xl text-base transition-all"
+              style={{ background: path === l.href ? "rgba(240,65,90,0.09)" : "transparent" }}>
+              {l.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold text-white"
             style={{ background: "var(--rose-400)" }}>
             {profile?.username?.[0]?.toUpperCase() ?? "?"}
           </div>
-          <span className="text-sm hidden sm:block" style={{ color: "var(--color-text-2)" }}>@{profile?.username}</span>
+          <span className="text-sm hidden md:block" style={{ color: "var(--color-text-2)" }}>
+            @{profile?.username}
+          </span>
           <form action={logout}>
-            <button type="submit" className="text-xs px-2 py-1 rounded-lg transition-all hover:opacity-70"
-              style={{ color: "var(--color-muted)" }}>Keluar</button>
+            <button type="submit" className="text-xs px-2 py-1 rounded-lg hover:opacity-70 transition-all"
+              style={{ color: "var(--color-muted)" }}>
+              Keluar
+            </button>
           </form>
         </div>
       </div>

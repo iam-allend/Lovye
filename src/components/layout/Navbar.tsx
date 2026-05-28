@@ -13,7 +13,7 @@ import { cn } from "@/utils";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "#templates", label: "Template" },
+  { href: "templates", label: "Template" },
   { href: "#showcase", label: "Showcase" },
   { href: "#categories", label: "Kategori" },
 ];
