@@ -1,3 +1,6 @@
+
+import type { Json } from "./database";
+
 export type Profile = {
   id: string;
   username: string;
@@ -57,6 +60,7 @@ export type FieldType =
   | "text"
   | "textarea"
   | "image"
+  | "images"
   | "music"
   | "date"
   | "color";
@@ -68,6 +72,7 @@ export type FieldSchema = {
   placeholder?: string;
   required?: boolean;
   maxLength?: number;
+  maxFiles?: number; 
 };
 
 export type SceneType =
@@ -87,16 +92,20 @@ export type SceneConfig = {
 };
 
 export type TemplateConfig = {
+  id?: string;
+  name?: string;
+  category?: string;
   scenes: SceneConfig[];
   defaultMusic?: string;
   transitionType?: "fade" | "slide" | "scale";
+  transition?: "fade" | "slide" | "scale";
 };
 
 // ============================================================
 // EDITOR TYPES
 // ============================================================
 
-export type PageCustomData = Record<string, unknown>;
+export type PageCustomData = Record<string, Json>;
 
 export type EditorState = {
   templateId: string;
@@ -125,3 +134,7 @@ export type MusicPreset = {
 export type ApiResponse<T = null> =
   | { success: true; data: T }
   | { success: false; error: string };
+
+
+
+  

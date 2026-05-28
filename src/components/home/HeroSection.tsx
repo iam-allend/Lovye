@@ -12,8 +12,8 @@ export default function HeroSection() {
         relative
         overflow-hidden
         px-4
-        pt-36
-        pb-24
+        pt-30
+        pb-20
       "
     >
       <div className="mx-auto max-w-5xl">

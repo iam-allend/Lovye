@@ -1,18 +1,21 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import type { EditorState, PageCustomData, TemplateConfig } from "@/types";
+import type { Json } from "@/types/database";
+
+
 
 type EditorActions = {
   initEditor: (templateId: string, config: TemplateConfig, initialData?: PageCustomData) => void;
   setCurrentScene: (index: number) => void;
-  updateField: (sceneId: string, fieldName: string, value: unknown) => void;
+  updateField: (sceneId: string, fieldName: string, value: Json) => void;
   setIsSaving: (saving: boolean) => void;
   resetEditor: () => void;
 };
 
 const initialState: EditorState = {
   templateId: "",
-  templateConfig: { scenes: [] },
+  templateConfig: { scenes: [] },  // ← tetap sama, sudah aman
   currentSceneIndex: 0,
   customData: {},
   isDirty: false,

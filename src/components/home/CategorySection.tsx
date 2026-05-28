@@ -11,7 +11,7 @@ export default function CategorySection() {
   return (
     <section
       id="categories"
-      className="px-4 py-10"
+      className="px-4 pb-10 pt-0"
     >
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-wrap gap-3">

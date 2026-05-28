@@ -1,0 +1,1 @@
+export { romanticPinkConfig as schema } from "./config";

@@ -88,3 +88,22 @@ export async function getProfile(userId: string) {
 export async function updateProfile(userId: string, payload: ProfileUpdate) {
   return createClient().from("profiles").update(payload).eq("id", userId).select().single();
 }
+
+// ---- Landing Page ----
+
+export async function getFeaturedTemplates(limit = 4) {
+  return createClient()
+    .from("templates")
+    .select("id, name, slug, category, price, is_free")
+    .eq("is_active", true)
+    .order("sort_order")
+    .limit(limit);
+}
+
+export async function getAllActiveTemplates() {
+  return createClient()
+    .from("templates")
+    .select("id, name, slug, category, price, is_free, config_json")
+    .eq("is_active", true)
+    .order("sort_order");
+}
