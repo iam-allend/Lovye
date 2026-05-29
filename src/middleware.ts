@@ -1,8 +1,9 @@
+// PATH: src/middleware.ts
 import { type NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
-const PROTECTED = ["/dashboard", "/editor", "/profile"];
-const AUTH_ONLY  = ["/login", "/register"]; // redirect to /dashboard if already logged in
+const PROTECTED = ["/dashboard", "/editor"];
+const AUTH_ONLY  = ["/login", "/register"];
 
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request });
@@ -32,16 +33,19 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
-  // Redirect unauthenticated users away from protected pages
+  // Protect dashboard & editor routes
   if (!user && PROTECTED.some((p) => path.startsWith(p))) {
     const url = new URL("/login", request.url);
     url.searchParams.set("redirectTo", path);
     return NextResponse.redirect(url);
   }
 
+  // /u/* adalah public — tidak perlu auth
   return response;
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
 };
