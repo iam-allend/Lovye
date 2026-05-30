@@ -13,7 +13,7 @@ import { cn } from "@/utils";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "templates", label: "Template" },
+  { href: "/templates", label: "Template" },
   { href: "#showcase", label: "Showcase" },
   { href: "#categories", label: "Kategori" },
 ];
@@ -40,10 +40,12 @@ export default function Navbar() {
   }, []);
 
   const isActive = (href: string) => {
-    if (href === "/") {
-      return pathname === "/" && !activeHash;
+    // halaman biasa
+    if (href.startsWith("/")) {
+      return pathname === href;
     }
 
+    // anchor/hash
     return activeHash === href;
   };
 
